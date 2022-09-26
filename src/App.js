@@ -6,6 +6,7 @@ import {
 import { MantineProvider } from '@mantine/core';
 import BooksPage from './pages/BooksPage';
 import BookPage from './pages/BookPage';
+import CharacterPage from './pages/CharacterPage';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/book/:id',
     element: <BookPage />,
+  },
+  {
+    path: '/character/:id',
+    element: <CharacterPage />,
   },
 ]);
 

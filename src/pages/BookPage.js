@@ -1,8 +1,10 @@
-import { Loader, Space, Tabs, Text, Title } from '@mantine/core';
-import { useParams } from 'react-router-dom';
-import BookInfos from '../components/BookInfos';
+import { Anchor, Grid, Loader, Space, Tabs, Text, Title } from '@mantine/core';
+import { useParams, Link } from 'react-router-dom';
+import InfoList from '../components/InfoList';
+import CharacterPreview from '../components/CharacterPreview';
 import Layout from '../components/Layout';
 import useBook from '../hooks/useBook';
+import { extractId } from '../lib/helpers';
 
 const BookPage = () => {
   const { id } = useParams();
@@ -14,7 +16,7 @@ const BookPage = () => {
 
       {!isBookLoading && !!bookError && (
         <Text color="red" transform="uppercase">
-          Error loading books.
+          Error loading book.
         </Text>
       )}
 
@@ -27,14 +29,12 @@ const BookPage = () => {
           <Tabs defaultValue="infos">
             <Tabs.List>
               <Tabs.Tab value="infos">Infos</Tabs.Tab>
-              <Tabs.Tab value="povCharacters">
-                Point-of-view characters
-              </Tabs.Tab>
+              <Tabs.Tab value="povCharacters">POV characters</Tabs.Tab>
               <Tabs.Tab value="characters">Characters</Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="infos" pt="xs" px="md">
-              <BookInfos
+              <InfoList
                 infos={[
                   { term: 'Author', description: book.authors.join(', ') },
                   { term: 'Publisher', description: book.publisher },
@@ -45,19 +45,28 @@ const BookPage = () => {
             </Tabs.Panel>
 
             <Tabs.Panel value="povCharacters" pt="xs" px="md">
-              <ul>
+              <Grid>
                 {book.povCharacters.map((character, index) => (
-                  <li key={index}>{character}</li>
+                  <Grid.Col key={index} xs={12} sm={6} md={4}>
+                    <CharacterPreview id={extractId(character)} />
+                  </Grid.Col>
                 ))}
-              </ul>
+              </Grid>
             </Tabs.Panel>
 
             <Tabs.Panel value="characters" pt="xs" px="md">
-              <ul>
+              <Grid>
                 {book.characters.map((character, index) => (
-                  <li key={index}>{character}</li>
+                  <Grid.Col key={index} xs={12} sm={6} md={4}>
+                    <Anchor
+                      component={Link}
+                      to={`/character/${extractId(character)}`}
+                    >
+                      {extractId(character)}
+                    </Anchor>
+                  </Grid.Col>
                 ))}
-              </ul>
+              </Grid>
             </Tabs.Panel>
           </Tabs>
         </>

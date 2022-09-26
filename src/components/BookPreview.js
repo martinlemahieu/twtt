@@ -1,7 +1,7 @@
 import { Button, Card, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { extractId } from '../lib/helpers';
-import BookInfos from './BookInfos';
+import InfoList from './InfoList';
 
 const BookPreview = ({ book }) => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const BookPreview = ({ book }) => {
         </Text>
       </Card.Section>
 
-      <BookInfos
+      <InfoList
         infos={[
           { term: 'Author', description: book.authors.join(', ') },
           { term: 'ISBN', description: book.isbn },

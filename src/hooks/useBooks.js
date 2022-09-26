@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 
 const useBooks = () => {
   const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get('https://www.anapioficeandfire.com/api/books')
+      .get('https://www.anapioficeandfire.com/api/books?pageSize=50')
       .then((response) => {
         setBooks(response.data);
         setIsLoading(false);

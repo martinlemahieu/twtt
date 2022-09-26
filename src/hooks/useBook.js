@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useBook = (id) => {
   const [book, setBook] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const useBook = (id) => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error('Error loading books.', err);
+        console.error('Error loading book.', err);
         setError(err);
         setIsLoading(false);
       });

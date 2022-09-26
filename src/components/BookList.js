@@ -3,8 +3,7 @@ import BookPreview from './BookPreview';
 
 const BookList = ({ books }) => {
   return (
-    <div>
-      <p>book list:</p>
+    <>
       <Grid>
         {books.map((book, index) => (
           <Grid.Col key={index} xs={12} sm={6} md={4}>
@@ -12,7 +11,7 @@ const BookList = ({ books }) => {
           </Grid.Col>
         ))}
       </Grid>
-    </div>
+    </>
   );
 };
 

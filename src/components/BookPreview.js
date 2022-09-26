@@ -1,21 +1,10 @@
-import { Button, Card, createStyles, Text } from '@mantine/core';
+import { Button, Card, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { extractId } from '../lib/helpers';
-
-const useStyles = createStyles(() => ({
-  infoList: {
-    '& > dt': {
-      fontWeight: 'bold',
-    },
-    '& > dd': {
-      marginLeft: '1em',
-    },
-  },
-}));
+import BookInfos from './BookInfos';
 
 const BookPreview = ({ book }) => {
   const navigate = useNavigate();
-  const { classes } = useStyles();
 
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
@@ -25,16 +14,13 @@ const BookPreview = ({ book }) => {
         </Text>
       </Card.Section>
 
-      <dl className={classes.infoList}>
-        <dt>Author</dt>
-        <dd>{book.authors.join(', ')}</dd>
-
-        <dt>ISBN</dt>
-        <dd>{book.isbn}</dd>
-
-        <dt>Pages</dt>
-        <dd>{book.numberOfPages}</dd>
-      </dl>
+      <BookInfos
+        infos={[
+          { term: 'Author', description: book.authors.join(', ') },
+          { term: 'ISBN', description: book.isbn },
+          { term: 'Pages', description: book.numberOfPages },
+        ]}
+      />
 
       <Button
         variant="light"

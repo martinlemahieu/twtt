@@ -9,12 +9,14 @@ const BooksPage = () => {
   return (
     <Layout>
       {areBooksLoading && <Loader />}
+
       {!areBooksLoading && !!booksError && (
         <Text color="red" transform="uppercase">
           Error loading books.
         </Text>
       )}
-      {!areBooksLoading && !booksError && <BookList books={books} />}
+
+      {!!books && !areBooksLoading && !booksError && <BookList books={books} />}
     </Layout>
   );
 };

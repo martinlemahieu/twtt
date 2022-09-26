@@ -1,9 +1,35 @@
-import { MantineProvider, Text } from '@mantine/core';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
+import BooksPage from './pages/BooksPage';
+import BookPage from './pages/BookPage';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/books" replace />,
+  },
+  {
+    path: '/books',
+    element: <BooksPage />,
+  },
+  {
+    path: '/book/:id',
+    element: <BookPage />,
+  },
+]);
 
 const App = () => {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Text>Welcome to Mantine!</Text>
+    <MantineProvider
+      theme={{ colorScheme: 'dark' }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
+      <RouterProvider router={router} />
     </MantineProvider>
   );
 };
